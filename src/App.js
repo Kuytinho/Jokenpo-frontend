@@ -1,14 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login'; // Crie o componente Login
+import Cadastro from './pages/Cadastro'; // Crie o componente Cadastro
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importe o arquivo CSS do Bootstrap
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Choo Choo! This is an example of a create-react-app site running on Railway.</p>
-        <a className="App-link" href="https://react.dev/learn" target="_blank" rel="noreferrer noopener">Learn React</a>
-      </header>
+    <div>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+      </Routes>
     </div>
   );
 }

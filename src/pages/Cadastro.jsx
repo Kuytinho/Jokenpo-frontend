@@ -22,6 +22,37 @@ function Cadastro() {
     return nome.trim() !== '';
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!isNomeValid() || !isEmailValid() || !isPasswordValid()) {
+      alert('Por favor, preencha todos os campos corretamente.');
+      return;
+    }
+
+    const data = { nome, email, senha };
+
+    try {
+      const response = await fetch('https://expressjs-prisma-production-18bf.up.railway.app/cadastros', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert('Cadastro realizado com sucesso!');
+        // Você pode redirecionar o usuário para outra página ou executar ações adicionais aqui.
+      } else {
+        alert('Erro ao cadastrar. Tente novamente mais tarde.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao conectar ao servidor. Tente novamente mais tarde.');
+    }
+  };
+
   return (
     <div>
       <div className="container mt-5">
@@ -32,7 +63,7 @@ function Cadastro() {
                 <h4>Cadastre-se</h4>
               </div>
               <div className="card-body">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className={`form-group ${!isNomeValid() ? 'has-error' : ''}`}>
                     <label htmlFor="nome">Nome</label>
                     <input

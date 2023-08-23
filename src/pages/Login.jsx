@@ -16,6 +16,38 @@ function Login() {
     return password.length >= 6;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!isEmailValid() || !isPasswordValid()) {
+      alert('Verifique seus dados de login.');
+      return;
+    }
+
+    try {
+      const response = await fetch('https://expressjs-prisma-production-18bf.up.railway.app/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha: password }),
+      });
+
+      if (response.ok) {
+        // Login bem-sucedido, redirecione o usuário para a página de perfil ou dashboard, por exemplo.
+        // Substitua 'YOUR_PROFILE_PAGE_PATH' pelo caminho da sua página de perfil.
+        // window.location.href = '/YOUR_PROFILE_PAGE_PATH';
+        alert('Cadastro realizado com sucesso!');
+      } else {
+        // Login falhou, exiba uma mensagem de erro
+        alert('Credenciais inválidas. Tente novamente.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao fazer login. Tente novamente mais tarde.');
+    }
+  };
+
   return (
    <div>
      <div className="container mt-5">
@@ -26,7 +58,7 @@ function Login() {
               <h4>Login</h4>
             </div>
             <div className="card-body">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">E-mail</label>
                   <input

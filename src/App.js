@@ -2,9 +2,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Login from './pages/Login'; // Crie o componente Login
-import Cadastro from './pages/Cadastro'; // Crie o componente Cadastro
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importe o arquivo CSS do Bootstrap
+import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import RockPaperScissors from './pages/RockPaperScissors';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/game" element={<RockPaperScissors />} />
       </Routes>
     </div>
   );

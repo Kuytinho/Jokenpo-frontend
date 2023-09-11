@@ -34,12 +34,9 @@ function Login() {
       });
 
       if (response.ok) {
-        // Login bem-sucedido, redirecione o usuário para a página de perfil ou dashboard, por exemplo.
-        // Substitua 'YOUR_PROFILE_PAGE_PATH' pelo caminho da sua página de perfil.
-        // window.location.href = '/YOUR_PROFILE_PAGE_PATH';
+        window.location.href = '/game';
         alert('Cadastro realizado com sucesso!');
       } else {
-        // Login falhou, exiba uma mensagem de erro
         alert('Credenciais inválidas. Tente novamente.');
       }
     } catch (error) {

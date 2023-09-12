@@ -35,7 +35,6 @@ function Login() {
 
       if (response.ok) {
         window.location.href = '/game';
-        alert('Cadastro realizado com sucesso!');
       } else {
         alert('Credenciais inválidas. Tente novamente.');
       }

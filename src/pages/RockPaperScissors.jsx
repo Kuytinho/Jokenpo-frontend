@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../components/Footer';
+import playerLogo from '../logos/playerNormal.png';
+import computerLogo from '../logos/compuNormal.png';
+import playerLose from '../logos/playerLose.png';
+import computerLose from '../logos/compuLose.png';
 
 const options = ['Pedra ✊', 'Papel 🤚', 'Tesoura ✌'];
 
@@ -9,7 +13,18 @@ function RockPaperScissors() {
   const [result, setResult] = useState(null);
   const [playerScore, setPlayerScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
-  const [gameTitle, setGameTitle] = useState('Faça sua jogada'); // Defina o título inicial
+  const [gameTitle, setGameTitle] = useState('Faça sua jogada');
+  const [modoNoturno, setModoNoturno] = useState(false);
+  const [playerImage, setPlayerImage] = useState(playerLogo);
+  const [computerImage, setComputerImage] = useState(computerLogo);
+
+  const ativarModoNoturno = () => {
+    setModoNoturno(true);
+  };
+
+  const desativarModoNoturno = () => {
+    setModoNoturno(false);
+  };
 
   const generateComputerChoice = () => {
     const randomIndex = Math.floor(Math.random() * options.length);
@@ -50,17 +65,39 @@ function RockPaperScissors() {
     setGameTitle('Faça sua jogada'); // Retorna o título para "Faça sua jogada"
   };
 
+  // Use useEffect para monitorar as pontuações e alterar as imagens com base na pontuação
+  useEffect(() => {
+    if (playerScore > computerScore) {
+      setComputerImage(computerLose);
+    } else if (computerScore > playerScore) {
+      setPlayerImage(playerLose);
+    } else {
+      // Se houver empate ou pontuação igual, volte para as imagens normais
+      setPlayerImage(playerLogo);
+      setComputerImage(computerLogo);
+    }
+  }, [playerScore, computerScore]);
+
   return (
-    <div className="container mt-5">
+    <div className={`container mt-5 ${modoNoturno ? 'bg-dark text-light' : ''}`}>
+      <div className="text-center">
+        <button onClick={ativarModoNoturno} className="btn btn-dark mr-2">
+          Ativar Modo Noturno
+        </button>
+        <button onClick={desativarModoNoturno} className="btn btn-light">
+          Desativar Modo Noturno
+        </button>
+      </div>
       <div className="row">
         <div className="col-md-4">
           <div className="text-center">
             <h2>Jogador</h2>
             <p>Placar: {playerScore}</p>
+            <img src={playerImage} alt="Logo do Jogador" />
           </div>
         </div>
         <div className="col-md-4">
-          <h1 className="text-center mb-4">{gameTitle}</h1> {/* Título dinâmico */}
+          <h1 className="text-center mb-4">{gameTitle}</h1>
           <div className="text-center options">
             {options.map((option) => (
               <button
@@ -74,11 +111,11 @@ function RockPaperScissors() {
             ))}
           </div>
           {playerChoice && (
-            <div className="text-center result mt-4">
+            <div className={`text-center result mt-4 ${modoNoturno ? 'bg-dark text-light' : ''}`}>
               <div className="card">
-                <div className="card-body">
+                <div className={`card-body ${modoNoturno ? 'bg-dark text-light' : ''}`}>
                   <h4 className="card-title">Resultados:</h4>
-                  <div className="row justify-content-center">
+                  <div className={`row justify-content-center ${modoNoturno ? 'bg-dark text-light' : ''}`}>
                     <div className="col-md-6">
                       <p className="card-text">Você: {playerChoice}</p>
                       <p className="card-text">Máquina: {computerChoice}</p>
@@ -100,6 +137,7 @@ function RockPaperScissors() {
           <div className="text-center">
             <h2>Máquina</h2>
             <p>Placar: {computerScore}</p>
+            <img src={computerImage} alt="Logo da Máquina" />
           </div>
         </div>
       </div>

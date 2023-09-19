@@ -4,6 +4,7 @@ import playerLogo from '../logos/playerNormal.png';
 import computerLogo from '../logos/compuNormal.png';
 import playerLose from '../logos/playerLose.png';
 import computerLose from '../logos/compuLose.png';
+import '../css/RockPaperScissors.css'; // Importe o arquivo de estilos CSS
 
 const options = ['Pedra ✊', 'Papel 🤚', 'Tesoura ✌'];
 
@@ -17,6 +18,8 @@ function RockPaperScissors() {
   const [modoNoturno, setModoNoturno] = useState(false);
   const [playerImage, setPlayerImage] = useState(playerLogo);
   const [computerImage, setComputerImage] = useState(computerLogo);
+  const [playerImageClass, setPlayerImageClass] = useState('');
+  const [computerImageClass, setComputerImageClass] = useState('');
 
   const ativarModoNoturno = () => {
     setModoNoturno(true);
@@ -40,11 +43,11 @@ function RockPaperScissors() {
       (player === 'Tesoura ✌' && computer === 'Papel 🤚')
     ) {
       setPlayerScore(playerScore + 1);
-      setGameTitle('Boa jogada!'); // Altera o título para "Boa jogada!"
+      setGameTitle('Boa jogada!');
       return 'Você venceu!';
     } else {
       setComputerScore(computerScore + 1);
-      setGameTitle('Poxa vida!'); // Altera o título para "Poxa vida!"
+      setGameTitle('Poxa vida!');
       return 'Máquina venceu!';
     }
   };
@@ -62,17 +65,21 @@ function RockPaperScissors() {
     setPlayerChoice(null);
     setComputerChoice(null);
     setResult(null);
-    setGameTitle('Faça sua jogada'); // Retorna o título para "Faça sua jogada"
+    setGameTitle('Faça sua jogada');
+    setPlayerImageClass('');
+    setComputerImageClass('');
   };
 
-  // Use useEffect para monitorar as pontuações e alterar as imagens com base na pontuação
   useEffect(() => {
     if (playerScore > computerScore) {
       setComputerImage(computerLose);
+      setPlayerImageClass('moveUp');
+      setComputerImageClass('moveDown');
     } else if (computerScore > playerScore) {
       setPlayerImage(playerLose);
+      setPlayerImageClass('moveDown');
+      setComputerImageClass('moveUp');
     } else {
-      // Se houver empate ou pontuação igual, volte para as imagens normais
       setPlayerImage(playerLogo);
       setComputerImage(computerLogo);
     }
@@ -90,7 +97,7 @@ function RockPaperScissors() {
       </div>
       <div className="row">
         <div className="col-md-4">
-          <div className="text-center">
+          <div className={`text-center ${playerImageClass}`}>
             <h2>Jogador</h2>
             <p>Placar: {playerScore}</p>
             <img src={playerImage} alt="Logo do Jogador" />
@@ -134,7 +141,7 @@ function RockPaperScissors() {
           )}
         </div>
         <div className="col-md-4">
-          <div className="text-center">
+          <div className={`text-center ${computerImageClass}`}>
             <h2>Máquina</h2>
             <p>Placar: {computerScore}</p>
             <img src={computerImage} alt="Logo da Máquina" />

@@ -1,0 +1,36 @@
+/* RockPaperScissors.css */
+
+.moveUp {
+    animation-name: moveUpAnimation;
+    animation-duration: 0.5s; /* Defina a duração da animação conforme necessário */
+    animation-timing-function: ease; /* Use o timing function desejado */
+    animation-fill-mode: forwards; /* Mantém a imagem na posição final após a animação */
+  }
+  
+  .moveDown {
+    animation-name: moveDownAnimation;
+    animation-duration: 0.5s; /* Defina a duração da animação conforme necessário */
+    animation-timing-function: ease; /* Use o timing function desejado */
+    animation-fill-mode: forwards; /* Mantém a imagem na posição final após a animação */
+  }
+  
+  /* Defina as transformações para mover a imagem para cima */
+  @keyframes moveUpAnimation {
+    from {
+      transform: translateY(0); /* Começa na posição atual */
+    }
+    to {
+      transform: translateY(-20px); /* Move para cima 20 pixels, ajuste conforme necessário */
+    }
+  }
+  
+  /* Defina as transformações para mover a imagem para baixo */
+  @keyframes moveDownAnimation {
+    from {
+      transform: translateY(0); /* Começa na posição atual */
+    }
+    to {
+      transform: translateY(20px); /* Move para baixo 20 pixels, ajuste conforme necessário */
+    }
+  }
+  

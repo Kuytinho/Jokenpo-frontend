@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importe useNavigate do React Router
 import Footer from '../components/Footer';
 import playerLogo from '../logos/playerNormal.png';
 import computerLogo from '../logos/compuNormal.png';
@@ -20,6 +21,8 @@ function RockPaperScissors() {
   const [computerImage, setComputerImage] = useState(computerLogo);
   const [playerImageClass, setPlayerImageClass] = useState('');
   const [computerImageClass, setComputerImageClass] = useState('');
+
+  const navigate = useNavigate(); // Use o hook useNavigate para navegar para outra rota
 
   const ativarModoNoturno = () => {
     setModoNoturno(true);
@@ -59,6 +62,14 @@ function RockPaperScissors() {
     setPlayerChoice(choice);
     setComputerChoice(computer);
     setResult(winner);
+
+    if (playerScore === 10) {
+      localStorage.setItem('winner', 'player'); // Armazene 'player' no localStorage
+      navigate('/winner'); // Navegue para a rota "/winner"
+    } else if (computerScore === 10) {
+      localStorage.setItem('winner', 'computer'); // Armazene 'computer' no localStorage
+      navigate('/winner'); // Navegue para a rota "/winner"
+    }
   };
 
   const handlePlayAgain = () => {

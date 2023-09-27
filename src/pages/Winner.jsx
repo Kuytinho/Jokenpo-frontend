@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../css/Winner.css'; // Importe o arquivo de estilos CSS
 
 function Winner() {
   const [winner, setWinner] = useState(null);
@@ -10,7 +11,7 @@ function Winner() {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 rotate-scale-up">
       <h1 className="text-center">Ja vi o bastante...</h1>
       {winner === 'player' && (
         <div className="text-center">
@@ -30,6 +31,9 @@ function Winner() {
           {/* Adicione qualquer conteúdo adicional que você queira mostrar */}
         </div>
       )}
+
+      
+      <a href="/game" class="btnspecial"> Play Again</a>
     </div>
   );
 }

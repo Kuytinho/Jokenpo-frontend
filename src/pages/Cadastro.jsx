@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 function Cadastro() {
   const [nome, setNome] = useState('');
@@ -116,6 +117,8 @@ function Cadastro() {
                   >
                     Cadastrar
                   </button>
+                  <Link to="/login" className="btn btn-primary">Login</Link>
+                  <Link to="/" className="btn btn-secondary">Voltar</Link>
                 </form>
               </div>
             </div>

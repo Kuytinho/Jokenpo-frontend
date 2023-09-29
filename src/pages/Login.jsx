@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -88,6 +89,8 @@ function Login() {
                 <button type="submit" className="btn btn-primary" disabled={!isEmailValid() || !isPasswordValid()}>
                   Entrar
                 </button>
+                <Link to="/cadastro" className="btn btn-primary">Cadastre-se</Link>
+                <Link to="/" className="btn btn-secondary">Voltar</Link>
               </form>
             </div>
           </div>

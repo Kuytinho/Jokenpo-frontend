@@ -1,0 +1,26 @@
+/* Estilos padrão para dispositivos maiores */
+.mobile-heading {
+    font-size: 24px; /* Tamanho de fonte maior para dispositivos maiores */
+  }
+  
+  .mobile-text {
+    font-size: 18px; /* Tamanho de fonte maior para dispositivos maiores */
+  }
+  
+  .mobile-image {
+    max-width: 100%; /* Imagem responsiva para dispositivos maiores */
+  }
+  
+  /* Estilos para dispositivos menores (media query) */
+  @media (max-width: 768px) {
+    .mobile-heading {
+      font-size: 20px; /* Tamanho de fonte menor para dispositivos menores */
+    }
+  
+    .mobile-text {
+      font-size: 16px; /* Tamanho de fonte menor para dispositivos menores */
+    }
+  
+    /* Você pode ajustar estilos adicionais aqui para dispositivos menores */
+  }
+  
